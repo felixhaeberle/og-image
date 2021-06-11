@@ -1,6 +1,7 @@
+import { ParsedRequest, Theme } from './types';
+
 import { IncomingMessage } from 'http';
 import { parse } from 'url';
-import { ParsedRequest, Theme } from './types';
 
 export function parseRequest(req: IncomingMessage) {
     console.log('HTTP ' + req.url);
@@ -51,15 +52,12 @@ function getArray(stringOrArray: string[] | string | undefined): string[] {
 }
 
 function getDefaultImages(images: string[], theme: Theme): string[] {
-    const defaultImage = theme === 'light'
-        ? 'https://assets.vercel.com/image/upload/front/assets/design/vercel-triangle-black.svg'
-        : 'https://assets.vercel.com/image/upload/front/assets/design/vercel-triangle-white.svg';
+    const defaultImage = theme === 'dark'
+        ? 'https://felixhaeberle.com/_next/image?url=%2Fimages%2Fprofile-2.svg&w=640&q=75'
+        : 'https://felixhaeberle.com/_next/image?url=%2Fimages%2Fprofile-2.svg&w=640&q=75';
 
     if (!images || !images[0]) {
         return [defaultImage];
-    }
-    if (!images[0].startsWith('https://assets.vercel.com/') && !images[0].startsWith('https://assets.zeit.co/')) {
-        images[0] = defaultImage;
     }
     return images;
 }

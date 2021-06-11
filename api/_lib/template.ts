@@ -1,8 +1,7 @@
-
-import { readFileSync } from 'fs';
-import marked from 'marked';
-import { sanitizeHtml } from './sanitizer';
 import { ParsedRequest } from './types';
+import marked from 'marked';
+import { readFileSync } from 'fs';
+import { sanitizeHtml } from './sanitizer';
 const twemoji = require('twemoji');
 const twOptions = { folder: 'svg', ext: '.svg' };
 const emojify = (text: string) => twemoji.parse(text, twOptions);
@@ -13,13 +12,11 @@ const mono = readFileSync(`${__dirname}/../_fonts/Vera-Mono.woff2`).toString('ba
 
 function getCss(theme: string, fontSize: string) {
     let background = 'white';
-    let foreground = 'black';
-    let radial = 'lightgray';
+    let foreground = '#040d21';
 
     if (theme === 'dark') {
-        background = 'black';
+        background = '#040d21';
         foreground = 'white';
-        radial = 'dimgray';
     }
     return `
     @font-face {
@@ -45,7 +42,6 @@ function getCss(theme: string, fontSize: string) {
 
     body {
         background: ${background};
-        background-image: radial-gradient(circle at 25px 25px, ${radial} 2%, transparent 0%), radial-gradient(circle at 75px 75px, ${radial} 2%, transparent 0%);
         background-size: 100px 100px;
         height: 100vh;
         display: flex;
